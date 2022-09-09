@@ -11,7 +11,7 @@
  */
 class Solution {
 public:
-    TreeNode* pruneTree(TreeNode* root) { // T.C. O(n) and A.S. O(h) DFS 
+    TreeNode* pruneTree(TreeNode* root) { // T.C. O(n) and A.S. O(h) DFS Approach (call stack space)
         if(!root){
             return root;
         }
