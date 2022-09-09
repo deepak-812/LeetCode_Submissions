@@ -42,7 +42,7 @@ public:
 };
 */
 
-class Solution {  // T.C. O(n) and A.S. O(h)+O(n) O(h) for DFS and O(n) for Hashmap
+class Solution {  // T.C. O(n) and A.S. O(h)+O(n) O(h) for DFS(call stack) and O(n) for Hashmap
 public:
     int preind;
     unordered_map<int,int> mp;
