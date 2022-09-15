@@ -16,7 +16,7 @@ public:
 };
 */
 
-class Solution { // BFS based Solution Iterative Version
+class Solution { // BFS based Solution (Iterative Version)
 public:
     Node* connect(Node* root) {  // T.C. O(n) A.S. O(W+1) W is max-width of Tree
         if(!root){
