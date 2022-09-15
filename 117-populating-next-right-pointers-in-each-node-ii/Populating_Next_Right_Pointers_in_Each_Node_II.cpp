@@ -16,7 +16,7 @@ public:
 };
 */
 
-class Solution {  // Iterative Solution T.C.  O(n)  A.S. O(w+1)
+class Solution {  // Iterative Solution T.C.  O(n)  A.S. O(w+1) where w is width of tree
 public:
     Node* connect(Node* root) {
         if(!root){
