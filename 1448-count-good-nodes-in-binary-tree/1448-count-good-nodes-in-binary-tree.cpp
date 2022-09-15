@@ -9,7 +9,7 @@
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
-class Solution {  // O(H) T.C.  O(n) A.S. O(H) (call stack space)
+class Solution {  // O(H) T.C.  O(n) A.S. O(H) (call stack auxilary space) DFS 
 public:
     int cnt;
     int goodNodes(TreeNode* root) {
