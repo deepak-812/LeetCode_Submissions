@@ -7,8 +7,8 @@
  *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
  * };
  */
-
-class Solution { // T.C. O(3h) A.S. O(3h)
+/*
+class Solution { // T.C. O(3h) A.S. O(3h)  Naive Solution
 public:
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
         if(!root){
@@ -47,5 +47,19 @@ public:
         else{
             solve(root->left,v,q);
         } 
+    }
+};
+*/
+
+class Solution { //we use advantages of BST basically LCA in BST is that where one in smaller than root and other is greater than root 
+public: // T.C. O(h) and A.S. O(h)
+    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+        if ((root -> val > p -> val) && (root -> val > q -> val)) {
+            return lowestCommonAncestor(root -> left, p, q);
+        }
+        if ((root -> val < p -> val) && (root -> val < q -> val)) {
+            return lowestCommonAncestor(root -> right, p, q);
+        }
+        return root;
     }
 };
