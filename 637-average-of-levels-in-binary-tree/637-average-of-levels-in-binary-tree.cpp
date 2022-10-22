@@ -11,7 +11,7 @@
  */
 class Solution {
 public:
-    vector<double> averageOfLevels(TreeNode* root) {
+    vector<double> averageOfLevels(TreeNode* root) { // O(n) BFS Aproach O(w) A.S.
         vector<double> avg;
         if(!root){
             return avg;
