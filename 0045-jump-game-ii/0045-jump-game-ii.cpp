@@ -3,6 +3,9 @@ public:
     int jump(vector<int>& nums) {
         vector<int> dp(nums.size(),-1);
         dp[nums.size()-1]=0;
+        for(int i=nums.size()-2;i>=0;i--){
+            
+        }
         return solve(nums,0,nums.size()-1,dp);
     }
     
