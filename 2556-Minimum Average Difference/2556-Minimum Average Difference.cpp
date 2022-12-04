@@ -1,4 +1,4 @@
-class Solution {
+class Solution { // T.C.O(n) and A. S. O(2n) not best approach
 
 public:
 
