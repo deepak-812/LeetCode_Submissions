@@ -15,14 +15,14 @@ public :
     void push(int);
 };
 */
-
+/* // T.C. O(n) A.S. O(1)
 class Solution{
     int minEle;
     stack<int> ax;
     stack<int> s;
     public:
     
-       /*returns min element from stack*/
+    //  returns min element from stack
        int getMin(){
            if(ax.size()==0){
                return -1;
@@ -31,7 +31,7 @@ class Solution{
            //Write your code here
        }
        
-       /*returns poped element from stack*/
+    //   /*returns poped element from stack
        int pop(){
            if(s.size()==0){
                return -1;
@@ -45,7 +45,7 @@ class Solution{
            //Write your code here
        }
        
-       /*push element x into the stack*/
+    //   /*push element x into the stack
        void push(int x){
            if(!ax.size() || x<=ax.top()){
                ax.push(x);
@@ -54,6 +54,63 @@ class Solution{
            //Write your code here
        }
 };
+*/
+
+// T.C. O(n) and A.S. O(1) Best Solution
+
+class Solution{
+    int min;
+    stack<int> s;
+    public:
+    
+       /*returns min element from stack*/
+       int getMin(){
+           if(s.size()==0){
+               return -1;
+           }
+           return min;
+           //Write your code here
+       }
+       
+       /*returns poped element from stack*/
+       int pop(){
+           if(s.size()==0){
+               return -1;
+           }
+           int val;
+           if(s.top()<=0){
+               min=min+(abs(s.top()));
+               val=min+s.top();
+           }
+           else{
+               val=s.top();
+           }
+           s.pop();
+           return val;
+           //Write your code here
+       }
+       
+       /*push element x into the stack*/
+       void push(int x){
+           if(!s.size()){
+               min=x;
+               s.push(x);
+               return;
+           }
+           if(x<=min){
+               s.push(x-min);
+               min=x;
+           }
+           else{
+               s.push(x);
+           }
+           //Write your code here
+       }
+};
+
+
+
+
 
 //{ Driver Code Starts.
 
