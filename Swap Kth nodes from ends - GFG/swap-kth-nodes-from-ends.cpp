@@ -99,7 +99,7 @@ Node *swapkthnode(Node* head, int num, int k){
         nd=nd->next;
         curr=curr->next;
     }
-    if(ptr==prev){
+    if(ptr==prev){ // Check for self pointer
         if(prv)prv->next=nd;
             Node* tmp=nd->next;
             nd->next=ptr;
