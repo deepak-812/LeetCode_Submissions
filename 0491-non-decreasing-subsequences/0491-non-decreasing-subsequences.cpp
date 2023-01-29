@@ -1,6 +1,6 @@
 class Solution {
 public:
-    vector<vector<int>> findSubsequences(vector<int>& nums) {
+    vector<vector<int>> findSubsequences(vector<int>& nums) { // T.C. O(pow(2,n)+log(n)) A.S. O(3*n)
         vector<int> v;
         set<vector<int>> st;
         solve(nums,v,0,st);
