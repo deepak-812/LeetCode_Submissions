@@ -10,16 +10,15 @@ public:
     void solve(vector<int>& nums,vector<int> &v,int ind,set<vector<int>>& st){
         if(ind==nums.size()){
             if(v.size()>1){
-                vector<int> tmp(v.begin(),v.end());
-                sort(tmp.begin(),tmp.end());
-                if(tmp==v)
-                    st.emplace(v);
+                st.emplace(v);
             }
             return;
         }
-        v.push_back(nums[ind]);
-        solve(nums,v,ind+1,st);
-        v.pop_back();   
+        if(!v.size() || (nums[ind]>=v.back())){
+            v.push_back(nums[ind]);
+            solve(nums,v,ind+1,st);
+            v.pop_back();    
+        }  
         solve(nums,v,ind+1,st);
     }
 };
