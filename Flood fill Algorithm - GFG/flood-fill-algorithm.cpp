@@ -5,35 +5,29 @@ using namespace std;
 // } Driver Code Ends
 class Solution {
 private:
-   int n,m;
-   bool isValid(int r,int c,vector<vector<int>> image,vector<vector<bool>> &vis,int initial){
-       if(r<0 || c<0 || r>=n || c>=m)return false;
-       if(image[r][c]!=initial || vis[r][c])return false;
-       return true;
-   }
-public:
-    vector<vector<int>> floodFill(vector<vector<int>> image, int sr, int sc, int newColor) { //T.C. O(4*n^2) A.S. O(n^2) O(n^2)
-        // Code here 
-        n=image.size() , m=image[0].size();
-        vector<vector<bool>> vis(n,vector<bool> (m,false));
-        int initial=image[sr][sc];
-        vector<int> dx={1,0,-1,0} , dy={0,-1,0,1};
-        queue<pair<int,int>> q;
-        q.push({sr,sc});
-        vis[sr][sc]=true;
-        while(!q.empty()){
-            int x=q.front().first;
-            int y=q.front().second;
-            q.pop();
-            image[x][y]=newColor;
-            for(int i=0;i<4;i++){
-                if(isValid(x+dx[i],y+dy[i],image,vis,initial)){
-                    vis[x+dx[i]][y+dy[i]]=true;
-                    q.push({x+dx[i],y+dy[i]});
-                }
+    int n,m,initial;
+    void dfs(int r,int c,vector<vector<int>> &grid,vector<vector<bool>> &vis,int newColor,vector<int> &dx,vector<int> &dy ){
+        vis[r][c]=true;
+        grid[r][c]=newColor;
+        for(int i=0;i<4;i++){
+            int x=r+dx[i];
+            int y=c+dy[i];
+            if(x>=0 && x<n && y>=0 && y<m && !vis[x][y] && grid[x][y]==initial){
+                dfs(x,y,grid,vis,newColor,dx,dy);
             }
         }
-        return image;
+    }
+public:
+    vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int newColor) {
+        // Code here 
+        n=image.size() , m=image[0].size();
+        initial=image[sr][sc];
+        vector<int> dx={1,0,-1,0} , dy={0,-1,0,1};
+        vector<vector<bool>> vis(n,vector<bool> (m,false));
+        int initial=image[sr][sc];
+        vector<vector<int>> grid(image.begin(),image.end());
+        dfs(sr,sc,grid,vis,newColor,dx,dy);
+        return grid;
     }
 };
 
