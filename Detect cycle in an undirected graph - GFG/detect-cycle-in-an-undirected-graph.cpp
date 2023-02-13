@@ -8,22 +8,26 @@ class Solution {
     // Function to detect cycle in an undirected graph.
     bool isCycle(int v, vector<int> adj[]) {
         // Code here
-        vector<bool> vis(100001,false);
+        vector<bool> vis(v,false);
         for(int i=0;i<v;i++){
             if(!vis[i]){
-                if(dfs(i,-1,adj,vis))return true;
-            }
-        }
-        return false;
-    }
-    bool dfs(int node,int par,vector<int> adj[],vector<bool> &vis){
-        vis[node]=true;
-        for(auto child:adj[node]){
-            if(!vis[child]){
-                if(dfs(child,node,adj,vis))return true;
-            }
-            else{
-                if(par!=child)return true;
+                queue<pair<int,int>> q;
+                q.push({i,-1});
+                vis[i]=true;
+                while(!q.empty()){
+                    int node=q.front().first;
+                    int par=q.front().second;
+                    q.pop();
+                    for(auto child:adj[node]){
+                        if(!vis[child]){
+                            q.push({child,node});
+                            vis[child]=true;
+                        }
+                        else if(par!=child){
+                            return true;
+                        }
+                    }
+                }
             }
         }
         return false;
