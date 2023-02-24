@@ -6,28 +6,29 @@ using namespace std;
 class Solution {
 private:
     vector<int> col;
-    bool dfs(int node,int c,vector<int> adj[]){
-        col[node]=c;
-        for(int i=0;i<adj[node].size();i++){
-            if(col[adj[node][i]]==-1){
-                if(!dfs(adj[node][i],c^1,adj)){
-                    return false;
-                }
-            }
-            else if(col[adj[node][i]]==col[node]){
-                return false;
-            }
-        }
-        return true;
-    }
 public:
 	bool isBipartite(int v, vector<int>adj[]){
 	    // Code here
-	   col.resize(v,-1);
+	    col.resize(v,-1);
+	    queue<int> q;
 	    for(int i=0;i<v;i++){
 	        if(col[i]==-1){
-	            if(!dfs(i,0,adj))return false;
-	        }
+	            q.push(i);
+	            col[i]=0;
+	             while(!q.empty()){
+	                 int node=q.front();
+	                 q.pop();
+	                 for(auto child:adj[node]){
+	                     if(col[child]==-1){
+	                         col[child]=col[node]^1;
+	                         q.push(child);
+	                     }
+	                     else if(col[child]==col[node]){
+	                         return false;
+	                     }
+	                 }
+	            }
+	         }   
 	    }
 	    return true;
 	}
