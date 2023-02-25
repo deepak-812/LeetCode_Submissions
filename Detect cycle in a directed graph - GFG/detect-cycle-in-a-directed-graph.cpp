@@ -4,31 +4,36 @@ using namespace std;
 
 // } Driver Code Ends
 class Solution {
-  private:
-    bool dfs(int node,vector<int> adj[],vector<bool> &currPath,vector<bool> &vis){
-        vis[node]=true , currPath[node]=true;
-        for(auto child:adj[node]){
-            if(!vis[child]){
-                if(dfs(child,adj,currPath,vis))return true;
-            }
-            else if(currPath[child]){
-                return true;
-            }
-        }
-        currPath[node]=false;
-        return false;
-    }
   public:
     // Function to detect cycle in a directed graph.
     bool isCyclic(int v, vector<int> adj[]) {
         // code here
-        vector<bool> currPath(v,false) , vis(v,false);
+        // detect cycle using BFS (toposort)
+        int inDegree[v]={0};
         for(int i=0;i<v;i++){
-            if(!vis[i]){
-                if(dfs(i,adj,currPath,vis))return true;
+            for(auto it:adj[i]){
+                inDegree[it]++;
             }
         }
-        return false;
+        vector<int> topo;
+        queue<int> q;
+        for(int i=0;i<v;i++){
+            if(!inDegree[i]){
+                q.push(i);
+            }
+        }
+        while(!q.empty()){
+            int node=q.front();
+            q.pop();
+            topo.push_back(node);
+            for(auto it:adj[node]){
+                inDegree[it]--;
+                if(!inDegree[it]){
+                    q.push(it);
+                }
+            }
+        }
+        return topo.size()!=v;
     }
 };
 
