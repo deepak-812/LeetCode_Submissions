@@ -1,25 +1,33 @@
 class Solution {
 public:
-    int mx=-1;
-    void dfs(vector<int> &ed , vector<int> &pvis , vector<int> &vis , int i , int j){
-        if(pvis[i]){
-            mx = max(mx , j - pvis[i]);
-            return;
+    void dfs(int node,vector<int> adj[],vector<bool> &vis,int &ans,int cn,int p){
+        vis[node]=true;
+        cn++;
+        for(auto it:adj[node]){
+            if(!vis[it]){
+                dfs(it,adj,vis,ans,cn,p);
+            }
+            else if(vis[it] && it==p){
+                ans=max(cn,ans);
+            }
         }
-        if(!vis[i]){
-            pvis[i] =j; j++; vis[i]=1;
-            if(ed[i]!=-1) dfs(ed , pvis , vis , ed[i],j);
-        }
-        pvis[i] = 0;
-        return;
     }
-
-    int longestCycle(vector<int>& ed) {
-        vector<int> vis(ed.size(),0) , pvis(ed.size(),0);
-        mx = -1;
-        for(int i=0;i<ed.size();i++){
-            if(!vis[i]) dfs(ed,pvis,vis,i,1);
+    int longestCycle(vector<int>& edges) {
+        int n=edges.size();
+        vector<bool> vis(n,false);
+        vector<int> adj[n];
+        for(int i=0;i<n;i++){
+            if(edges[i]!=-1){
+                adj[edges[i]].push_back(i);
+            }
         }
-        return mx;
+        int ans=-1;
+        int cycleNodes=0;
+        for(int i=0;i<n;i++){
+            if(!vis[i]){
+                dfs(i,adj,vis,ans,cycleNodes,i);
+            }
+        }
+        return ans;
     }
 };
