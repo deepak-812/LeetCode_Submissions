@@ -1,0 +1,1 @@
+select * from (select t.id, iif(t.p_id is null,'Root',iif(t2.id is null,'Leaf','Inner')) as type from tree t left join tree t2 on t.id=t2.p_id) x group by id, type;
