@@ -1,0 +1,1 @@
+select format(trans_date, 'yyyy-MM') month, country, count(*) as trans_count, count(iif(state='approved',1,null)) approved_count, sum(amount) trans_total_amount, sum(iif(state='approved',amount,0)) as approved_total_amount from transactions group by format(trans_date,'yyyy-MM'), country;
