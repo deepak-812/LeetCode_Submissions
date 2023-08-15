@@ -1,0 +1,2 @@
+/* Write your T-SQL query statement below */
+select s.user_id, iif(c is null,0.00,c) as confirmation_rate from signups s left join (select user_id, cast((count(iif(action='confirmed',1,null))*1.00)/(count(*)*1.00) as decimal(38,2)) as c from confirmations group by user_id) x on x.user_id=s.user_id;
