@@ -1,0 +1,2 @@
+/* Write your T-SQL query statement below */
+select p.product_id, cast(sum(price*units)/(sum(units)*1.00) as decimal(38,2)) as average_price from prices p inner join unitsSold u on u.purchase_date between p.start_date and p.end_date and p.product_id=u.product_id group by p.product_id;
