@@ -1,0 +1,2 @@
+/* Write your T-SQL query statement below */
+select cast((count(iif(order_date=customer_pref_delivery_date,1,null))/(count(*)*1.00)*100)  as decimal(38,2)) as immediate_percentage from (select *, row_number() over(partition by customer_id order by order_date) as rn from delivery) x where rn=1;
