@@ -1,0 +1,2 @@
+/* Write your T-SQL query statement below */
+(select cast(sum(tiv_2016) as decimal(38,2)) as tiv_2016 from insurance i1 where 1=(select count(*) from insurance i2 where i1.lon=i2.lon and i1.lat=i2.lat) and 1<(select count(*) from insurance i2 where i2.tiv_2015=i1.tiv_2015));
