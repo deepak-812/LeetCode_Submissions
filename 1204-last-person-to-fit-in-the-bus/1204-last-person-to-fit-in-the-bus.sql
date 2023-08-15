@@ -1,0 +1,1 @@
+select top 1 person_name from (select person_name, weight, turn, sum(weight) over(order by turn) as weightSum from queue) q where weightSum<=1000 order by weightSum desc;
